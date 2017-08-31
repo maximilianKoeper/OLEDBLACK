@@ -8,6 +8,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+
 public class MainActivity extends AppCompatActivity {
 
     Switch switchButton, switchButton2;
@@ -38,4 +39,9 @@ public class MainActivity extends AppCompatActivity {
         startService(svc);
     }
 
+    public void resetSwitch(){
+        switchButton.setChecked(false);
+    }
+
 }
+
