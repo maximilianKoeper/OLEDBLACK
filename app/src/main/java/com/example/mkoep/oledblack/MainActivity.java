@@ -1,7 +1,15 @@
 package com.example.mkoep.oledblack;
 
+import android.Manifest;
+import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.graphics.Color;
+import android.os.Build;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -61,11 +69,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setColor(){
-        int i = Integer.parseInt(red.getText().toString());
-        int j = Integer.parseInt(green.getText().toString());
-        int k = Integer.parseInt(blue.getText().toString());
-        button.setBackgroundColor(Color.rgb(i, j, k));
-        OverlayShowingService.col = Color.rgb(i, j, k);
+        try {
+            int i = Integer.parseInt(red.getText().toString());
+            int j = Integer.parseInt(green.getText().toString());
+            int k = Integer.parseInt(blue.getText().toString());
+
+            int rgb ;
+
+            try {
+                rgb = Color.rgb(i,j,k);
+                button.setBackgroundColor(rgb);
+                OverlayShowingService.col = rgb;
+            }
+            catch (Exception e){
+                button.setText("No RGB Format!");
+            }
+        }
+        catch (Exception e){
+            button.setText("No RGB Format!");
+        }
+
+
     }
 
     public void startOverlay(){
@@ -76,8 +100,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void stopOverlay(){
-        stopService(svc);
+        try {
+            stopService(svc);
+        }
+        catch (Exception e){
 
+        }
     }
 
 
