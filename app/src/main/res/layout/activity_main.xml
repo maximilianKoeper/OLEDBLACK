@@ -11,7 +11,7 @@
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="53dp"
         android:checked="false"
         android:text="Black Overlay"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -37,5 +37,57 @@
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="20dp"
         app:layout_constraintGuide_begin="20dp" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="37dp"
+        android:ems="10"
+        android:hint="Red"
+        android:inputType="number"
+        android:maxLength="3"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="Green"
+        android:inputType="number"
+        android:maxLength="3"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="Blue"
+        android:inputType="number"
+        android:maxLength="3"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="128dp"
+        android:layout_marginTop="40dp"
+        android:text="Apply"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,16 +1,26 @@
 package com.example.mkoep.oledblack;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
 
     Switch switchButton, switchButton2;
     Intent svc;
+
+    EditText red;
+    EditText green;
+    EditText blue;
+    Button button;
 
 
     @Override
@@ -34,6 +44,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        button = (Button) findViewById(R.id.button);
+        red = (EditText) findViewById(R.id.editText4);
+        green = (EditText) findViewById(R.id.editText5);
+        blue = (EditText) findViewById(R.id.editText6);
+
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            //On click function
+            public void onClick(View view) {
+                //Create the intent to start another activity
+                setColor();
+            }
+        });
+
+    }
+
+    public void setColor(){
+        int i = Integer.parseInt(red.getText().toString());
+        int j = Integer.parseInt(green.getText().toString());
+        int k = Integer.parseInt(blue.getText().toString());
+        button.setBackgroundColor(Color.rgb(i, j, k));
+        OverlayShowingService.col = Color.rgb(i, j, k);
     }
 
     public void startOverlay(){
