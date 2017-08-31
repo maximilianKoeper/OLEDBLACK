@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Switch switchButton, switchButton2;
+    Intent svc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +25,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
                 if (bChecked) {
-                    //textView.setText(switchOn);
                     startOverlay();
                 } else {
-                    //textView.setText(switchOff);
+                    stopOverlay();
                 }
             }
         });
@@ -35,8 +35,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startOverlay(){
-        Intent svc = new Intent(this, OverlayShowingService.class);
+        svc = new Intent(this, OverlayShowingService.class);
         startService(svc);
+
+    }
+    public void stopOverlay(){
+        stopService(svc);
+
     }
 
     public void resetSwitch(){

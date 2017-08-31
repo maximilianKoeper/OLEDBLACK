@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
+import android.app.Activity;
 
 public class OverlayShowingService extends Service implements OnClickListener {
 
@@ -44,6 +45,7 @@ public class OverlayShowingService extends Service implements OnClickListener {
             wm.removeView(overlayedButton);
             overlayedButton = null;
         }
+       return;
 
     }
 
@@ -57,7 +59,7 @@ public class OverlayShowingService extends Service implements OnClickListener {
         //android.os.Process.killProcess(android.os.Process.myPid());
         //System.runFinalizersOnExit(true);
         //System.exit(0);
-
+        return;
     }
 
 }
