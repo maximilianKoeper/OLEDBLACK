@@ -3,10 +3,8 @@ package com.example.mkoep.oledblack;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -14,10 +12,14 @@ public class MainActivity extends AppCompatActivity {
     Switch switchButton, switchButton2;
     Intent svc;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        OverlayShowingService.col = 0xff000000;
+
 
         switchButton = (Switch) findViewById(R.id.switch1);
 
@@ -36,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void startOverlay(){
         svc = new Intent(this, OverlayShowingService.class);
+        svc.putExtra("color", 0xff0000ff);
         startService(svc);
+
 
     }
     public void stopOverlay(){
@@ -44,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void resetSwitch(){
-        switchButton.setChecked(false);
-    }
 
 }
 

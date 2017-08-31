@@ -40,6 +40,7 @@ public class MyAppTileService extends TileService {
     public void onClick() {
         super.onClick();
         Intent svc = new Intent(this, OverlayShowingService.class);
+        svc.putExtra("color", 0xff0000ff);
         startService(svc);
 
         //Start main activity
