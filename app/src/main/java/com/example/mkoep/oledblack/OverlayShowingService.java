@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class OverlayShowingService extends Service implements OnClickListener {
 
-    private View  overlayedButton;
+    private View  Overlay;
     private WindowManager wm;
 
     public static int col;
@@ -33,13 +33,13 @@ public class OverlayShowingService extends Service implements OnClickListener {
 
         wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
 
-        overlayedButton = new Button(this);
-        overlayedButton.setBackgroundColor(col);
-        overlayedButton.setOnClickListener(this);
+        Overlay = new View(this);
+        Overlay.setBackgroundColor(col);
+        Overlay.setOnClickListener(this);
 
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.TYPE_SYSTEM_ALERT, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_DIM_BEHIND| WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION | WindowManager.LayoutParams.	FLAG_IGNORE_CHEEK_PRESSES, pf);
         try {
-            wm.addView(overlayedButton, params);
+            wm.addView(Overlay, params);
         }
 
         catch (Exception e){
@@ -56,9 +56,9 @@ public class OverlayShowingService extends Service implements OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (overlayedButton != null) {
-            wm.removeView(overlayedButton);
-            overlayedButton = null;
+        if (Overlay != null) {
+            wm.removeView(Overlay);
+            Overlay = null;
         }
 
     }
@@ -66,9 +66,9 @@ public class OverlayShowingService extends Service implements OnClickListener {
     @Override
     public void onClick(View v) {
         Toast.makeText(this, "Overlay disabled", Toast.LENGTH_SHORT).show();
-        if (overlayedButton != null) {
-            wm.removeView(overlayedButton);
-            overlayedButton = null;
+        if (Overlay != null) {
+            wm.removeView(Overlay);
+            Overlay = null;
         }
     }
 
