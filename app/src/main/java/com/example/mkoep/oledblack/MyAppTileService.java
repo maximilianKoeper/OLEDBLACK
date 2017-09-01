@@ -2,10 +2,6 @@ package com.example.mkoep.oledblack;
 
 import android.content.Intent;
 import android.service.quicksettings.TileService;
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-
 /**
  * Created by MKoep on 31.08.2017.
  */
@@ -19,6 +15,7 @@ public class MyAppTileService extends TileService {
     @Override
     public void onTileAdded() {
         super.onTileAdded();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override

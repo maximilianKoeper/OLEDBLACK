@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OLEDBLACK</string>
+    <string name="app_version">Beta 0.2</string>
 </resources>
