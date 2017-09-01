@@ -1,5 +1,6 @@
 package com.example.mkoep.oledblack;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Button;
-
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -74,11 +75,17 @@ public class MainActivity extends AppCompatActivity {
                 OverlayShowingService.col = rgb;
             }
             catch (Exception e){
-                button.setText("No RGB Format!");
+                CharSequence text = "Not RGB either!";
+
+                Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                toast.show();
             }
         }
         catch (Exception e){
-            button.setText("No RGB Format!");
+            CharSequence text = "Not RGB!";
+
+            Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+            toast.show();
         }
 
 

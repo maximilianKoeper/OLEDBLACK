@@ -47,7 +47,6 @@
         android:id="@+id/editText5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="65dp"
         android:ems="10"
         android:hint="Green"
         android:inputType="number"
@@ -82,10 +81,9 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="126dp"
         android:text="Standart: 0|0|0"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/editText6"
-        android:layout_alignEnd="@+id/button" />
+        android:layout_marginBottom="32dp"
+        android:layout_above="@+id/button"
+        android:layout_alignStart="@+id/button" />
 
 </RelativeLayout>
