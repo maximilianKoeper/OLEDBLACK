@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         OverlayShowingService.col = 0xff000000;
+        OverlayShowingService.pf = getWindowManager().getDefaultDisplay().getPixelFormat();
 
         switchButton = (Switch) findViewById(R.id.switch1);
 
@@ -68,16 +69,20 @@ public class MainActivity extends AppCompatActivity {
 
             int rgb ;
 
-            try {
-                rgb = Color.rgb(i,j,k);
-                button.setBackgroundColor(rgb);
-                OverlayShowingService.col = rgb;
-            }
-            catch (Exception e){
-                CharSequence text = "Not RGB either!";
+            if(i<=255 && j <= 255 && k<=255) {
+                try {
+                    rgb = Color.rgb(i, j, k);
+                    button.setBackgroundColor(rgb);
+                    OverlayShowingService.col = rgb;
+                } catch (Exception e) {
+                    CharSequence text = "Not RGB either!";
 
-                Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-                toast.show();
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+            else {
+                throw new Exception();
             }
         }
         catch (Exception e){
