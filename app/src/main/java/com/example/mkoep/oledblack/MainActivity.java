@@ -15,8 +15,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Button;
-import android.widget.Toast;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     EditText red;
     EditText green;
     EditText blue;
-    Button button;
 
 
     @Override
@@ -52,11 +49,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button = (Button) findViewById(R.id.button);
+        //button = (Button) findViewById(R.id.button);
         red = (EditText) findViewById(R.id.editText4);
         green = (EditText) findViewById(R.id.editText5);
         blue = (EditText) findViewById(R.id.editText6);
 
+        /*
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             //On click function
@@ -65,14 +63,17 @@ public class MainActivity extends AppCompatActivity {
                 setColor(view);
             }
         });
-
+        */
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setColor(view);
-                Snackbar.make(view, "Done", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar snackbar = Snackbar.make(view, "Done", Snackbar.LENGTH_LONG);
+                        //.setAction("Action", null).show();
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(OverlayShowingService.col);
+                snackbar.show();
             }
         });
 
@@ -100,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
         //Handle ResetClick.
         if (id == R.id.action_reset) {
             OverlayShowingService.col = 0xff000000;
+            red.setText("");
+            green.setText("");
+            blue.setText("");
             return true;
         }
 
@@ -141,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             if(i<=255 && j <= 255 && k<=255) {
                 try {
                     rgb = Color.rgb(i, j, k);
-                    button.setBackgroundColor(rgb);
+                    view.setBackgroundColor(rgb);
                     OverlayShowingService.col = rgb;
                 } catch (Exception e) {
                     CharSequence text = "Not RGB either!";
