@@ -3,6 +3,8 @@ package com.example.mkoep.oledblack;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -60,7 +62,17 @@ public class MainActivity extends AppCompatActivity {
             //On click function
             public void onClick(View view) {
                 //Create the intent to start another activity
-                setColor();
+                setColor(view);
+            }
+        });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setColor(view);
+                Snackbar.make(view, "Done", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
 
@@ -75,14 +87,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // automatically handle clicks on the Home/Up button.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            //TODO Start new activity for separated settings.
+
             return true;
         }
+
+        //Handle ResetClick.
         if (id == R.id.action_reset) {
             OverlayShowingService.col = 0xff000000;
             return true;
@@ -91,14 +106,38 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setColor(){
+
+    //Get RGB Color from User input and set it as Overlay Color (OverlayShowingService.col)
+    public void setColor(View view){
         try {
-            int i = Integer.parseInt(red.getText().toString());
-            int j = Integer.parseInt(green.getText().toString());
-            int k = Integer.parseInt(blue.getText().toString());
+            int i, j, k;
+
+            //If UserInput is null set it to 0
+            try {
+                i = Integer.parseInt(red.getText().toString());
+            }
+            catch (Exception e){
+                i=0;
+                red.setText("0");
+            }
+            try {
+                j = Integer.parseInt(green.getText().toString());
+            }
+            catch (Exception e){
+                j=0;
+                green.setText("0");
+            }
+            try {
+                k = Integer.parseInt(blue.getText().toString());
+            }
+            catch (Exception e){
+                k=0;
+                blue.setText("0");
+            }
 
             int rgb ;
 
+            //Test if User input is legit
             if(i<=255 && j <= 255 && k<=255) {
                 try {
                     rgb = Color.rgb(i, j, k);
@@ -106,26 +145,37 @@ public class MainActivity extends AppCompatActivity {
                     OverlayShowingService.col = rgb;
                 } catch (Exception e) {
                     CharSequence text = "Not RGB either!";
-
+                    /*
                     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                     toast.show();
+                    */
+                    Snackbar.make(view, text, Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
                 }
             }
+            //User input is not a RGB value
             else {
                 throw new Exception();
             }
         }
+        //Handle thrown exception
         catch (Exception e){
-            CharSequence text = "Not RGB!";
 
+            CharSequence text = "Not RGB!";
+            /*
             Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
             toast.show();
+            */
+            Snackbar.make(view, text, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
 
 
     }
 
+    //Starting OverlayService
     public void startOverlay(){
+        //Test if Service is already running
         if(!isIntentRunning()) {
             svc = new Intent(this, OverlayShowingService.class);
             svc.putExtra("color", 0xff0000ff);
@@ -133,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void stopOverlay(){
+        //TODO Possible Bug
+        //Test if Service is still running before trying to close it.
         try {
             if(isIntentRunning()) {
                 stopService(svc);
