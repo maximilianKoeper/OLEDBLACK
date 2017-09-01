@@ -42,8 +42,6 @@ public class MyAppTileService extends TileService {
             svc.putExtra("color", 0xff0000ff);
             startService(svc);
         }
-        //Start main activity
-        //startActivity(new Intent(this, MainActivity.class));
     }
 
     private boolean isIntentRunning() {
