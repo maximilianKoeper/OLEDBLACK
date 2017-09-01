@@ -1,5 +1,6 @@
 package com.example.mkoep.oledblack;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.service.quicksettings.TileService;
 /**
@@ -36,11 +37,22 @@ public class MyAppTileService extends TileService {
     @Override
     public void onClick() {
         super.onClick();
-        Intent svc = new Intent(this, OverlayShowingService.class);
-        svc.putExtra("color", 0xff0000ff);
-        startService(svc);
-
+        if(!isIntentRunning()) {
+            Intent svc = new Intent(this, OverlayShowingService.class);
+            svc.putExtra("color", 0xff0000ff);
+            startService(svc);
+        }
         //Start main activity
         //startActivity(new Intent(this, MainActivity.class));
+    }
+
+    private boolean isIntentRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if ("com.example.mkoep.oledblack.OverlayShowingService".equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

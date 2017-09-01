@@ -1,6 +1,6 @@
 package com.example.mkoep.oledblack;
 
-import android.content.Context;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         OverlayShowingService.col = 0xff000000;
-
 
         switchButton = (Switch) findViewById(R.id.switch1);
 
@@ -92,21 +91,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startOverlay(){
-        svc = new Intent(this, OverlayShowingService.class);
-        svc.putExtra("color", 0xff0000ff);
-        startService(svc);
-
-
+        if(!isIntentRunning()) {
+            svc = new Intent(this, OverlayShowingService.class);
+            svc.putExtra("color", 0xff0000ff);
+            startService(svc);
+        }
     }
     public void stopOverlay(){
         try {
-            stopService(svc);
+            if(isIntentRunning()) {
+                stopService(svc);
+            }
+            else {
+
+            }
         }
         catch (Exception e){
 
         }
     }
 
+    private boolean isIntentRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if ("com.example.mkoep.oledblack.OverlayShowingService".equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
 
