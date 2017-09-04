@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -90,14 +89,14 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button.
         int id = item.getItemId();
-
+        /*
         if (id == R.id.action_settings) {
 
             //TODO Start new activity for separated settings.
 
             return true;
         }
-
+        */
         //Handle ResetClick.
         if (id == R.id.action_reset) {
             OverlayShowingService.col = 0xff000000;
@@ -182,7 +181,8 @@ public class MainActivity extends AppCompatActivity {
         //Test if Service is already running
         if(!isIntentRunning()) {
             svc = new Intent(this, OverlayShowingService.class);
-            svc.putExtra("color", 0xff0000ff);
+            //svc.putExtra("color", 0xff0000ff);
+            //svc.putExtra("isFullScreen", true);
             startService(svc);
         }
     }
