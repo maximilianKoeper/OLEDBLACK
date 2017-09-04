@@ -53,23 +53,12 @@ public class MainActivity extends AppCompatActivity {
         green = (EditText) findViewById(R.id.editText5);
         blue = (EditText) findViewById(R.id.editText6);
 
-        /*
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            //On click function
-            public void onClick(View view) {
-                //Create the intent to start another activity
-                setColor(view);
-            }
-        });
-        */
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setColor(view);
-                Snackbar snackbar = Snackbar.make(view, "Done", Snackbar.LENGTH_LONG);
-                        //.setAction("Action", null).show();
+                Snackbar snackbar = Snackbar.make(view, "New color set", Snackbar.LENGTH_LONG);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(OverlayShowingService.col);
                 snackbar.show();
